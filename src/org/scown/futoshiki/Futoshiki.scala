@@ -10,11 +10,11 @@ case class Futoshiki(private val values: Map[Coordinates, Int], constraints: Con
 
 case class Constraints(private val constraints: List[Constraint]) {
 
-  private val map: Map[Coordinates, Constraint] = Map() ++ constraints.map {
-    case c@(lesser, greater) => CoordinatesOrdering.max(lesser, greater) -> c
-  }
+  private val map = constraints.groupBy({
+    case(lesser, greater) => CoordinatesOrdering.max(lesser, greater)
+  })
 
-  def get(c: Coordinates): Option[Constraint] = map.get(c)
+  def get(c: Coordinates): Option[List[Constraint]] = map.get(c)
 
 }
 
