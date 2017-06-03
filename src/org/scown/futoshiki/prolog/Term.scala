@@ -53,13 +53,13 @@ case class Terminal(term: Term) extends Term {
 }
 
 case class And(left: Term, right: Term) extends Term {
-  override def toProlog: String = left.toProlog + ',' + right.toProlog
+  override def toProlog: String = left.toProlog + "," + right.toProlog
 }
 
 case class Or(left: Term, right: Term) extends Term {
   override def toProlog: String = left.toProlog + ';' + right.toProlog
 }
 
-case class Not(left: Term, right: Term) extends Term {
-  override def toProlog: String = left.toProlog + "\\+" + right.toProlog
+case class Not(body: Term) extends Term {
+  override def toProlog: String = "\\+" + body.toProlog
 }
