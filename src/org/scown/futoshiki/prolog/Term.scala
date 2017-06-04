@@ -24,6 +24,12 @@ case class Variable(name: String) extends SimpleTerm {
 
 }
 
+case class Number(value: Int) extends SimpleTerm {
+
+  override def toProlog: String = value.toString
+
+}
+
 case class Fact(name: String, values: List[SimpleTerm]) extends Term {
 
   require(name.charAt(0).isLower)
