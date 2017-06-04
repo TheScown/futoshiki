@@ -67,3 +67,7 @@ case class Not(body: Term) extends Term {
 case class LessThan(left: SimpleTerm, right: SimpleTerm) extends Term {
   override def toProlog: String = left.toProlog + " < " + right.toProlog
 }
+
+case class Equal(left: SimpleTerm, right: SimpleTerm) extends Term {
+  override def toProlog: String = left.toProlog + " = " + right.toProlog
+}
