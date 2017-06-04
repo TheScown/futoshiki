@@ -63,3 +63,7 @@ case class Or(left: Term, right: Term) extends Term {
 case class Not(body: Term) extends Term {
   override def toProlog: String = "\\+" + body.toProlog
 }
+
+case class LessThan(left: SimpleTerm, right: SimpleTerm) extends Term {
+  override def toProlog: String = left.toProlog + " < " + right.toProlog
+}
