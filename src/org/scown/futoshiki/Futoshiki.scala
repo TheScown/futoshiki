@@ -24,7 +24,7 @@ private object CoordinatesOrdering extends Ordering[Coordinates] {
       case (x2, y2) =>
         val xs = Integer.compare(x1, x2)
 
-        if (xs != 0) Integer.compare(y1, y2) else xs
+        if (xs == 0) Integer.compare(y1, y2) else xs
     }
   }
 }
