@@ -14,6 +14,10 @@ import java.io.PrintStream
 
 import dev.scown.futoshiki.{Coordinates, Futoshiki}
 
+/**
+  * Generates Prolog code for a Futoshiki puzzle
+  * @param f The Futoshiki puzzle
+  */
 case class CodeGenerator(f: Futoshiki) {
 
   private val values = 1 to f.size
@@ -91,6 +95,10 @@ case class CodeGenerator(f: Futoshiki) {
     )
   }
 
+  /**
+    * Write the Futoshiki puzzle to the given PrintStream
+    * @param out The PrintStream to write to
+    */
   def writeProlog(out: PrintStream): Unit = {
     out.println(IN_RANGE.toProlog)
     out.println()

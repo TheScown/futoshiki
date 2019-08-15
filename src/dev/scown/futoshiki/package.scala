@@ -15,7 +15,13 @@ package dev.scown
   */
 package object futoshiki {
 
+  /**
+    * Represents the coordinates of a square in a puzzle
+    */
   type Coordinates = (Int, Int)
 
+  /**
+    * Defines the square at the first coordinate to be less than the square at the second coordinate
+    */
   type Constraint = (Coordinates, Coordinates)
 }
