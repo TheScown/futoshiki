@@ -8,14 +8,34 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package org.scown
+package dev.scown.futoshiki
 
-/**
-  * Created by alexscown on 3/6/17.
-  */
-package object futoshiki {
+case class Futoshiki(private val values: Map[Coordinates, Int], constraints: Constraints, size: Int = 5) {
 
-  type Coordinates = (Int, Int)
+  def get(c: Coordinates): Option[Int] = values.get(c)
 
-  type Constraint = (Coordinates, Coordinates)
+  def +(c: Coordinates, v: Int): Futoshiki = copy(values = values + (c -> v))
+
 }
+
+case class Constraints(private val constraints: List[Constraint]) {
+
+  private val map = constraints.groupBy({
+    case(lesser, greater) => CoordinatesOrdering.max(lesser, greater)
+  })
+
+  def get(c: Coordinates): Option[List[Constraint]] = map.get(c)
+
+}
+
+private object CoordinatesOrdering extends Ordering[Coordinates] {
+  override def compare(c1: Coordinates, c2: Coordinates): Int = c1 match {
+    case (x1, y1) => c2 match {
+      case (x2, y2) =>
+        val xs = Integer.compare(x1, x2)
+
+        if (xs == 0) Integer.compare(y1, y2) else xs
+    }
+  }
+}
+
